@@ -10,8 +10,12 @@ extends RefCounted
 var width := 1
 var height := 1
 var position := Vector2i.ZERO
-## Timing of held directions. The delay is the player's "hold delay" setting.
+## Timing of held directions. The delay is the player's "hold delay" setting. GUESS: a grid
+## cursor repeats faster than a menu (0.07 s a step, about 14 cells a second; menus use 0.12).
 var repeat := Logic_Stick_Repeat.new()
+
+func _init() -> void:
+	repeat.repeat_rate = 0.07
 
 func setup(grid_width: int, grid_height: int) -> void:
 	width = maxi(grid_width, 1)

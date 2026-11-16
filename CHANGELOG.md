@@ -2,6 +2,13 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (later): stopwatch, and a faster grid cursor
+
+From Picrops' puzzle screen (step 5d).
+- **`Logic_Stopwatch`** (new): a stopwatch that counts up, fed with frame time, with a `00:02:00` formatter. Tests: `Tests/test_stopwatch.gd`.
+- `Logic_Grid_Cursor` repeats faster than a menu by default (0.07 s a step; menus keep 0.12 s). It is still `repeat.repeat_rate` on the cursor if a game wants another speed.
+Games started earlier: pull with `-Direction ToGame`.
+
 ## 2026-11-17: grid cursor, hold-delay setting, more gameplay buttons
 
 From Picrops' puzzle screen (step 5d).
