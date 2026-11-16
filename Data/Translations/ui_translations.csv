@@ -5,6 +5,7 @@ ui_volume_music,Music,Musique
 ui_volume_sfx,Sound effects,Effets sonores
 ui_volume_ui,Interface sounds,Sons de l'interface
 ui_rumble_scale,Rumble strength,Intensité des vibrations
+ui_hold_delay,Hold delay,Délai avant répétition
 ui_language,Language,Langue
 ui_reduce_motion,Reduce motion,Réduire les animations
 ui_back,Back,Retour

@@ -17,6 +17,9 @@ const DEFAULTS := {
 	&"volume_ui": 1.0,
 	&"language": &"en",
 	&"rumble_scale": 1.0,
+	## How long a held direction waits before it starts repeating (a slider, 0..1; see
+	## Logic_Stick_Repeat.delay_for_setting). GUESS: 0.5 is the 0.35 s the menus used before.
+	&"hold_delay": 0.5,
 	&"reduce_motion": false,
 }
 

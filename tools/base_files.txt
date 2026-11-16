@@ -70,3 +70,4 @@ tools/base_lib.ps1
 tools/base_files.txt
 tools/diff_against_base.ps1
 tools/sync_with_base.ps1
+Tests/test_grid_cursor.gd

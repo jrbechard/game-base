@@ -103,6 +103,20 @@ step = 0.05
 value = 1.0
 metadata/setting_key = &"rumble_scale"
 
+[node name="Label_Hold_Delay" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_hold_delay"
+
+[node name="Slider_Hold_Delay" type="HSlider" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 0.5
+metadata/setting_key = &"hold_delay"
+
 [node name="Label_Language" type="Label" parent="Column/Grid_Settings"]
 layout_mode = 2
 size_flags_vertical = 4

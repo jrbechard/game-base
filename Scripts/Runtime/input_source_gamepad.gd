@@ -6,7 +6,7 @@ extends Input_Source
 ## and this class never holds a node path.
 
 const _STICK_DEADZONE := 0.2     # radial deadzone, same as Pogne
-const _ACTIONS: Array[StringName] = [&"interact", &"cancel", &"menu"]
+const _ACTIONS: Array[StringName] = [&"interact", &"cancel", &"menu", &"mark", &"alt_interact", &"count", &"alt_count"]
 
 var _device_getter: Callable   # () -> int
 var _type_getter: Callable     # () -> Logic_Input_Layout.GamepadType

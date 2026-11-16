@@ -2,6 +2,15 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17: grid cursor, hold-delay setting, more gameplay buttons
+
+From Picrops' puzzle screen (step 5d).
+- **`Logic_Grid_Cursor`** (new): a cursor on a grid of cells. One step on a press, a wait, then repeats while held; a held direction stops at an edge and only a fresh press wraps. Used for puzzle grids, inventories, editors.
+- **`hold_delay` setting** (new, `State_Settings`, a 0 to 1 slider, default 0.5 = the old 0.35 s) with a slider on the settings screen. `Logic_Stick_Repeat.delay_for_setting` turns it into seconds and the input router applies it to menu repeat; a grid cursor applies it too. `Logic_Stick_Repeat` also remembers whether its last fire was a fresh press (`last_fire_was_fresh`).
+- **Input sources** gained `mark` (top button), `alt_interact` (left button), `count` and `alt_count` (shoulders); positional, so they sit in the same place on every pad. A game that does not use them ignores them.
+- New tests: `Tests/test_grid_cursor.gd`. `ui_translations.csv` (a PATTERN file, copied by hand) gained `ui_hold_delay`.
+Games started earlier: pull with `-Direction ToGame`, then add the `ui_hold_delay` row to the game's `ui_translations.csv` by hand and run the game's tests.
+
 ## 2026-11-16: game-only files no longer raise false drift alarms
 
 Found while building Picrops' puzzle code: new game-only files in a shared folder (`Scripts/Logic/`) showed up as "new reusable files". The drift tools now support exclusions. Each game lists its own game-only files in `tools/game_exclusions.txt` (one pattern per line), and `new_game.ps1` creates that file. The base's own list also accepts `!` exclusion lines. Games started earlier: pull the tools (`-Direction ToGame`) and add a `tools/game_exclusions.txt`.

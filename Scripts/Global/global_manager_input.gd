@@ -50,6 +50,13 @@ func init() -> void:
 	# Why: init may run more than once in tests; never connect twice.
 	if not Input.joy_connection_changed.is_connected(_on_joy_connection_changed):
 		Input.joy_connection_changed.connect(_on_joy_connection_changed)
+	# The player's hold delay (a setting) decides how long a held stick waits to repeat.
+	if not Global_Manager_Events.setting_changed.is_connected(_on_setting_changed):
+		Global_Manager_Events.setting_changed.connect(_on_setting_changed)
+
+func _on_setting_changed(key: StringName, value: Variant) -> void:
+	if key == &"hold_delay":
+		_repeat.initial_delay = Logic_Stick_Repeat.delay_for_setting(value)
 
 # === Read ===
 func is_action_held(action: StringName) -> bool:

@@ -7,6 +7,10 @@ const _KEYS := {
 	&"interact": [KEY_E, KEY_SPACE, KEY_ENTER],
 	&"cancel": [KEY_Q, KEY_BACKSPACE],
 	&"menu": [KEY_ESCAPE, KEY_TAB],
+	&"mark": [KEY_C],
+	&"alt_interact": [KEY_Z],
+	&"count": [KEY_R],
+	&"alt_count": [KEY_SHIFT],
 }
 const _MOVE_KEYS := {
 	"left": [KEY_A, KEY_LEFT], "right": [KEY_D, KEY_RIGHT],
