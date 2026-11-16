@@ -27,6 +27,10 @@ func poll() -> void:
 	var device := get_device()
 	var type: Logic_Input_Layout.GamepadType = _type_getter.call()
 	for action in _ACTIONS:
+		var axis := Logic_Input_Layout.axis_for_action(action)
+		if axis >= 0:  # a trigger (ZR / RT): pressed past the threshold
+			_curr[action] = device >= 0 and Input.get_joy_axis(device, axis) >= Logic_Input_Layout.TRIGGER_THRESHOLD
+			continue
 		var button := Logic_Input_Layout.button_for_action(action, type)
 		_curr[action] = device >= 0 and Input.is_joy_button_pressed(device, button)
 

@@ -2,11 +2,14 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (final): triggers as gameplay buttons
+
+- `Logic_Input_Layout.axis_for_action` (new) and `TRIGGER_THRESHOLD`: Godot reports the triggers (ZL/ZR, LT/RT) as axes, not buttons, so an action can now be bound to a trigger. `Input_Source_Gamepad` reads such an action as pressed past the threshold. `count` is the right trigger. Games started earlier: pull with `-Direction ToGame`.
 ## 2026-11-17 (latest): rumble priority, and the puzzle buttons settled
 
 From Picrops' puzzle screen (step 5d).
 - **Rumble priority** (new): `Data_Rumble_Effect.priority` (0 by default). A lower-priority effect never cuts off a higher-priority one that is still buzzing; the same or a higher priority replaces it. This fixes two cues that fire together (for example "solved" and "item acquired") replacing each other on the pad. Games started earlier: pull with `-Direction ToGame`; nothing changes until a cue is given a priority.
-- **Gameplay buttons**: `mark` (top button), `count` (left button), `undo` and `redo` (the shoulders) replace the earlier `alt_interact` and `alt_count` (they were never used by a game yet). Keyboard: C, X or Shift, Z, Y. A game that does not use them ignores them.
+- **Gameplay buttons**: `mark` (top button), `count` (a trigger), `undo` and `redo` (the shoulders) replace the earlier `alt_interact` and `alt_count` (they were never used by a game yet). Keyboard: C, X or Shift, Z, Y. A game that does not use them ignores them.
 ## 2026-11-17 (later): stopwatch, and a faster grid cursor
 
 From Picrops' puzzle screen (step 5d).

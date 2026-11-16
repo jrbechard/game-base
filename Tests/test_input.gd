@@ -141,6 +141,7 @@ func test_keyboard_source_has_no_rumble_device() -> void:
 func test_the_puzzle_buttons_sit_in_the_same_place_on_every_pad() -> void:
 	for type in [Layout.GamepadType.XBOX, Layout.GamepadType.SWITCH]:
 		assert_eq(Layout.button_for_action(&"mark", type), JOY_BUTTON_Y, "mark is the top button")
-		assert_eq(Layout.button_for_action(&"count", type), JOY_BUTTON_X, "count is the left button")
+		assert_eq(Layout.button_for_action(&"count", type), -1, "count is a trigger, not a button")
+		assert_eq(Layout.axis_for_action(&"count"), JOY_AXIS_TRIGGER_RIGHT, "count is ZR")
 		assert_eq(Layout.button_for_action(&"undo", type), JOY_BUTTON_LEFT_SHOULDER)
 		assert_eq(Layout.button_for_action(&"redo", type), JOY_BUTTON_RIGHT_SHOULDER)
