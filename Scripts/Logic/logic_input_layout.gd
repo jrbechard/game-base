@@ -27,14 +27,15 @@ static func cancel_button(type: GamepadType) -> int:
 ## Gameplay action -> button index for a pad type. -1 for an unknown action.
 ## Godot names buttons by Xbox POSITION: JOY_BUTTON_Y is the top button and JOY_BUTTON_X the
 ## left one on every pad (on a Nintendo pad the top button is labelled X and the left Y).
-## `mark` and `alt_interact` are positional, so they sit in the same place on every pad.
+## `mark` and `count` are positional, so they sit in the same place on every pad. The shoulder
+## buttons are undo (left) and redo (right).
 static func button_for_action(action: StringName, type: GamepadType) -> int:
 	match action:
 		&"interact": return confirm_button(type)
 		&"cancel": return cancel_button(type)
 		&"menu": return JOY_BUTTON_START
 		&"mark": return JOY_BUTTON_Y            # top button
-		&"alt_interact": return JOY_BUTTON_X    # left button: does the same as interact
-		&"count": return JOY_BUTTON_RIGHT_SHOULDER
-		&"alt_count": return JOY_BUTTON_LEFT_SHOULDER  # does the same as count
+		&"count": return JOY_BUTTON_X           # left button (Y on a Nintendo pad)
+		&"undo": return JOY_BUTTON_LEFT_SHOULDER
+		&"redo": return JOY_BUTTON_RIGHT_SHOULDER
 	return -1

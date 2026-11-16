@@ -16,5 +16,8 @@ extends Resource
 @export_range(1, 8) var pulses := 1
 ## Silence between pulses, in seconds.
 @export_range(0.0, 1.0) var gap := 0.08
+## When two effects overlap, a lower priority never cuts off a higher one that is still
+## buzzing; the same or a higher priority replaces it (0 = ordinary).
+@export var priority := 0
 ## Bus event that fires this effect (a signal name on Global_Manager_Events). Empty = manual only.
 @export var trigger_event: StringName

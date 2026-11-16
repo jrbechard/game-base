@@ -8,9 +8,9 @@ const _KEYS := {
 	&"cancel": [KEY_Q, KEY_BACKSPACE],
 	&"menu": [KEY_ESCAPE, KEY_TAB],
 	&"mark": [KEY_C],
-	&"alt_interact": [KEY_Z],
-	&"count": [KEY_R],
-	&"alt_count": [KEY_SHIFT],
+	&"count": [KEY_X, KEY_SHIFT],
+	&"undo": [KEY_Z],
+	&"redo": [KEY_Y],
 }
 const _MOVE_KEYS := {
 	"left": [KEY_A, KEY_LEFT], "right": [KEY_D, KEY_RIGHT],

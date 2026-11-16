@@ -21,6 +21,8 @@ var _device_getter := Callable()       # () -> int, the active pad or -1
 var _connections: Array[Dictionary] = []  # {id, event, callable}
 var _last_play_frame: Dictionary = {}  # effect id -> process frame of its last play
 var _used_devices: Dictionary = {}     # devices we have buzzed, so stop_all can stop them
+var _busy_until := 0.0     # seconds (engine time) until the current effect has finished
+var _busy_priority := 0
 var _epoch := 0                        # bumped by stop_all to cancel running pulse trains
 
 # Why: Main hands in the device getter, so this manager needs no path to the input manager.
@@ -29,6 +31,8 @@ func init(device_getter: Callable) -> void:
 	_disconnect_all()
 	_effects.clear()
 	_last_play_frame.clear()
+	_busy_until = 0.0
+	_busy_priority = 0
 	_epoch += 1
 	rumble_scale = 1.0
 	backend = Callable(self, &"_send_to_hardware")
@@ -83,6 +87,13 @@ func _play_effect(fx: Data_Rumble_Effect, gain: float) -> void:
 		return
 	_last_play_frame[fx.id] = frame
 
+	# Priority: a lower-priority effect never cuts off a higher one that is still buzzing.
+	var now := Time.get_ticks_msec() / 1000.0
+	if now < _busy_until and fx.priority < _busy_priority:
+		return
+	_busy_priority = fx.priority
+	_busy_until = now + maxi(fx.pulses - 1, 0) * (fx.duration + fx.gap) + fx.duration
+
 	var weak := clampf(fx.weak * gain * rumble_scale, 0.0, 1.0)
 	var strong := clampf(fx.strong * gain * rumble_scale, 0.0, 1.0)
 	var epoch := _epoch
@@ -96,6 +107,7 @@ func _play_effect(fx: Data_Rumble_Effect, gain: float) -> void:
 ## Stop everything now (scene changes, pausing). Also cancels pulse trains still running.
 func stop_all() -> void:
 	_epoch += 1
+	_busy_until = 0.0
 	for device in _used_devices:
 		backend.call(device, 0.0, 0.0, 0.0)
 
