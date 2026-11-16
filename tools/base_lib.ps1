@@ -9,13 +9,20 @@ function Get-BasePatterns([string]$BaseDir) {
 }
 
 # A path is listed if it matches a pattern: "folder/" means everything under it, and "*"
-# matches any characters.
+# matches any characters. A pattern starting with "!" EXCLUDES: a file that matches one is never
+# listed, even inside a listed folder (for game-only files that live in a shared folder).
 function Test-Listed([string]$Relative, $Patterns) {
+	$included = $false
 	foreach ($p in $Patterns) {
-		if ($p.EndsWith('/')) { if ($Relative.StartsWith($p)) { return $true } }
-		elseif ($Relative -like $p) { return $true }
+		$exclude = $p.StartsWith('!')
+		$pattern = if ($exclude) { $p.Substring(1) } else { $p }
+		$hit = if ($pattern.EndsWith('/')) { $Relative.StartsWith($pattern) } else { $Relative -like $pattern }
+		if ($hit) {
+			if ($exclude) { return $false }
+			$included = $true
+		}
 	}
-	return $false
+	return $included
 }
 
 # Relative paths (forward slashes) of every file under a folder, skipping git and Godot's cache.
@@ -31,7 +38,14 @@ function Get-RelativeFiles([string]$Root) {
 #   ONLY_IN_BASE  the game does not have it
 #   ONLY_IN_GAME  the base does not have it (a new reusable file)
 function Compare-WithBase([string]$BaseDir, [string]$GameDir) {
-	$patterns = Get-BasePatterns $BaseDir
+	$patterns = @(Get-BasePatterns $BaseDir)
+	# A game lists its own game-only files (in folders the base shares) in tools/game_exclusions.txt.
+	$exclusionFile = Join-Path $GameDir 'tools/game_exclusions.txt'
+	if (Test-Path -LiteralPath $exclusionFile) {
+		$patterns += Get-Content -LiteralPath $exclusionFile |
+			Where-Object { $_.Trim() -ne '' -and -not $_.TrimStart().StartsWith('#') } |
+			ForEach-Object { '!' + $_.Trim() }
+	}
 	$baseFiles = Get-RelativeFiles $BaseDir | Where-Object { Test-Listed $_ $patterns }
 	$gameFiles = Get-RelativeFiles $GameDir | Where-Object { Test-Listed $_ $patterns }
 	$all = @($baseFiles) + @($gameFiles) | Sort-Object -Unique

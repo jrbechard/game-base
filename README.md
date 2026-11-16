@@ -70,6 +70,8 @@ The base is meant to grow with every game. It is the **upstream** for reusable c
 .\tools\sync_with_base.ps1 -GameDir "C:\Users\you\Desktop\other-game" -Direction ToGame -Apply
 ```
 
+A game keeps its own game-only files (for example puzzle logic that lives in `Scripts/Logic/`) out of the drift report by listing them in its `tools/game_exclusions.txt`, one pattern per line (`*` matches any characters, a trailing `/` means a whole folder).
+
 Sync copies listed files only and never deletes. Files a game edits on purpose (its project file, `main.gd`, the event bus's game block, its data and docs) are not listed, so they are never overwritten. A game's `tools/base_version.txt` records the base commit it started from.
 
 ## Notes

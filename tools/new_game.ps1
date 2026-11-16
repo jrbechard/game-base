@@ -42,6 +42,11 @@ foreach ($doc in @('CLAUDE.md', 'docs/DESIGN.md')) {
 	}
 }
 
+# Game-only files that live in folders the base shares are listed here, so the drift tools do
+# not mistake them for new reusable files.
+$exclusions = "# Game-only files in folders the base shares (one pattern per line; `"*`" matches any characters,`n# a trailing `"/`" means a whole folder). tools/diff_against_base.ps1 ignores these.`n"
+[System.IO.File]::WriteAllText((Join-Path $Dest 'tools/game_exclusions.txt'), $exclusions, $noBom)
+
 # Record where this game came from, so the drift checker and future you know.
 $hash = 'unknown'
 if (Get-Command git -ErrorAction SilentlyContinue) {
