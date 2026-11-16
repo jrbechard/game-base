@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="PackedScene" path="res://Scenes/Global/main.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Shell/shell_settings.tscn" id="2"]
+[ext_resource type="Script" path="res://Scripts/Debug/debug_music_starter.gd" id="3"]
+
+[node name="Debug_Settings" instance=ExtResource("1")]
+first_screen = ExtResource("2")
+
+[node name="Debug_Music_Starter" type="Node" parent="." index="4"]
+script = ExtResource("3")

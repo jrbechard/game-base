@@ -1,0 +1,143 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://Scripts/UI/shell_settings.gd" id="1"]
+[ext_resource type="Script" path="res://Scripts/Components/component_focus_navigator.gd" id="2"]
+[ext_resource type="Script" path="res://Scripts/Components/component_hover_effect.gd" id="3"]
+
+[node name="Shell_Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Column" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Label_Title" type="Label" parent="Column"]
+layout_mode = 2
+text = "ui_settings_title"
+horizontal_alignment = 1
+
+[node name="Grid_Settings" type="GridContainer" parent="Column"]
+layout_mode = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="Label_Volume_Master" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_volume_master"
+
+[node name="Slider_Volume_Master" type="HSlider" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+metadata/setting_key = &"volume_master"
+
+[node name="Label_Volume_Music" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_volume_music"
+
+[node name="Slider_Volume_Music" type="HSlider" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+metadata/setting_key = &"volume_music"
+
+[node name="Label_Volume_Sfx" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_volume_sfx"
+
+[node name="Slider_Volume_Sfx" type="HSlider" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+metadata/setting_key = &"volume_sfx"
+
+[node name="Label_Volume_Ui" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_volume_ui"
+
+[node name="Slider_Volume_Ui" type="HSlider" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+metadata/setting_key = &"volume_ui"
+
+[node name="Label_Rumble_Scale" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_rumble_scale"
+
+[node name="Slider_Rumble_Scale" type="HSlider" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 32)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.05
+value = 1.0
+metadata/setting_key = &"rumble_scale"
+
+[node name="Label_Language" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_language"
+
+[node name="Button_Language" type="Button" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+text = "English"
+metadata/setting_key = &"language"
+metadata/adjustable = true
+
+[node name="Component_Hover_Effect" type="Node" parent="Column/Grid_Settings/Button_Language"]
+script = ExtResource("3")
+
+[node name="Label_Reduce_Motion" type="Label" parent="Column/Grid_Settings"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "ui_reduce_motion"
+
+[node name="Button_Reduce_Motion" type="Button" parent="Column/Grid_Settings"]
+custom_minimum_size = Vector2(360, 48)
+layout_mode = 2
+toggle_mode = true
+text = "ui_off"
+metadata/setting_key = &"reduce_motion"
+
+[node name="Button_Back" type="Button" parent="Column"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "ui_back"
+metadata/action = &"back"
+
+[node name="Component_Hover_Effect" type="Node" parent="Column/Button_Back"]
+script = ExtResource("3")
+
+[node name="Component_Focus_Navigator" type="Node" parent="."]
+script = ExtResource("2")

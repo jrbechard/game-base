@@ -1,0 +1,69 @@
+# Files that should match the base in every game made from it.
+# Used by tools/diff_against_base.ps1. One pattern per line.
+#   - a path ending in "/" means everything under that folder
+#   - "*" matches any characters (for example Tests/test_input*)
+#   - lines starting with "#" are comments
+# Files a game edits (project.godot, main.gd, the event bus, Progress, GameData, data content,
+# docs) are NOT listed; they are expected to differ per game.
+
+.editorconfig
+.gitattributes
+.gutconfig.json
+addons/gut/
+
+Scripts/Global/global_manager_input.gd
+Scripts/Global/global_manager_save.gd
+Scripts/Global/global_manager_scenes.gd
+Scripts/Global/global_manager_sfx.gd
+Scripts/Global/global_manager_music.gd
+Scripts/Global/global_manager_settings.gd
+Scripts/Global/global_manager_rumble.gd
+
+Scripts/Logic/
+Scripts/Runtime/
+Scripts/Components/
+Scripts/UI/
+Scripts/States/state_base.gd
+Scripts/States/state_settings.gd
+Scripts/Data/Resources/data_base.gd
+Scripts/Data/Resources/data_ui_animation.gd
+Scripts/Data/Resources/data_rumble_effect.gd
+Scripts/Data/Resources/data_audio_cue.gd
+Scripts/Debug/debug_animator_test.gd
+Scripts/Debug/debug_audio_test.gd
+Scripts/Debug/debug_input_test.gd
+Scripts/Debug/debug_menu_test.gd
+Scripts/Debug/debug_music_starter.gd
+Scripts/Debug/debug_rumble_test.gd
+Scripts/Debug/debug_tile_test.gd
+
+Scenes/Global/debug_animator_test.tscn
+Scenes/Global/debug_audio_test.tscn
+Scenes/Global/debug_input_test.tscn
+Scenes/Global/debug_menu_test.tscn
+Scenes/Global/debug_rumble_test.tscn
+Scenes/Global/debug_settings.tscn
+Scenes/Global/debug_tile_test.tscn
+Scenes/Shell/shell_settings.tscn
+
+Data/UI/Animations/
+Data/Audio/Cues/menu_*
+
+Assets/Theming/
+Assets/SVG/tiles_test.svg
+Assets/Audio/UI/
+
+Tests/test_boot.gd
+Tests/test_input.gd
+Tests/test_focus_navigator.gd
+Tests/test_ui_animator.gd
+Tests/test_audio_logic.gd
+Tests/test_music.gd
+Tests/test_json_file.gd
+Tests/test_settings.gd
+Tests/test_shell_settings.gd
+
+tools/base_lib.ps1
+tools/base_files.txt
+tools/diff_against_base.ps1
+tools/sync_with_base.ps1

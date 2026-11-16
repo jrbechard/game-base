@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# OS / editor
+Thumbs.db
+.DS_Store
+*.tmp
+
+# Python caches (reference/solver)
+__pycache__/

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Data_Audio_Cue" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Data/Resources/data_audio_cue.gd" id="1"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/UI/menu_cancel.wav" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"menu_cancel"
+streams = Array[AudioStream]([ExtResource("2")])
+bus = &"UI"
+volume_db = -6.0
+pitch_range = 0.03
+trigger_event = &"menu_cancelled"

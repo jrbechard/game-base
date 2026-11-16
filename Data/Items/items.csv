@@ -1,0 +1,4 @@
+id,number,kind,name_en,name_fr
+example_tool,1,TOOL,Example Tool,Outil exemple
+example_key,2,KEY,Example Key,Clé exemple
+example_boost,3,BOOST,Example Boost,Bonus exemple

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Data_Audio_Cue" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Data/Resources/data_audio_cue.gd" id="1"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/item_acquired.wav" id="2"]
+
+[resource]
+script = ExtResource("1")
+id = &"item_acquired"
+streams = Array[AudioStream]([ExtResource("2")])
+bus = &"SFX"
+volume_db = -4.0
+pitch_range = 0.0
+trigger_event = &"item_acquired"

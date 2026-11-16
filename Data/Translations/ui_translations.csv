@@ -1,0 +1,12 @@
+keys,en,fr
+ui_settings_title,Settings,Paramètres
+ui_volume_master,Master volume,Volume général
+ui_volume_music,Music,Musique
+ui_volume_sfx,Sound effects,Effets sonores
+ui_volume_ui,Interface sounds,Sons de l'interface
+ui_rumble_scale,Rumble strength,Intensité des vibrations
+ui_language,Language,Langue
+ui_reduce_motion,Reduce motion,Réduire les animations
+ui_back,Back,Retour
+ui_on,On,Activé
+ui_off,Off,Désactivé

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Data_Rumble_Effect" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Data/Resources/data_rumble_effect.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"preview"
+weak = 0.5
+strong = 0.5
+duration = 0.2
+pulses = 1

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Global/main.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Shell/shell_empty.tscn" id="2"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1")
+first_screen = ExtResource("2")
+
+[node name="Screen_Host" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Overlay_Host" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Transition" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Debug" type="CanvasLayer" parent="."]
+layer = 128

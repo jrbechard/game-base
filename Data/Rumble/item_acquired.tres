@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Data_Rumble_Effect" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://Scripts/Data/Resources/data_rumble_effect.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"item_acquired"
+weak = 0.5
+strong = 0.3
+duration = 0.12
+pulses = 2
+gap = 0.08
+trigger_event = &"item_acquired"

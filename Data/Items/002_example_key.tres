@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Data_Item" format=3]
+
+[ext_resource type="Script" path="res://Scripts/Data/Resources/data_item.gd" id="1_yarhk"]
+
+[resource]
+script = ExtResource("1_yarhk")
+id = &"example_key"
+number = 2
+name = "item_example_key_name"
+name_en = "Example Key"
