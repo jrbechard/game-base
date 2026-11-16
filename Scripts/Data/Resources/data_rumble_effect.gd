@@ -19,5 +19,9 @@ extends Resource
 ## When two effects overlap, a lower priority never cuts off a higher one that is still
 ## buzzing; the same or a higher priority replaces it (0 = ordinary).
 @export var priority := 0
+## The event's first argument (a number from 0 to 1) scales the strength: `value_strength_min` of
+## the full strength at 0, the full strength at 1.
+@export var strength_from_value := false
+@export_range(0.0, 1.0) var value_strength_min := 0.4
 ## Bus event that fires this effect (a signal name on Global_Manager_Events). Empty = manual only.
 @export var trigger_event: StringName

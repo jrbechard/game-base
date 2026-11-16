@@ -16,5 +16,10 @@ extends Resource
 @export_range(0.0, 0.5) var pitch_range := 0.05
 ## Pitch multiplier before the random variation (1.0 = as recorded).
 @export_range(0.25, 4.0) var base_pitch := 1.0
+## The event's first argument (a number from 0 to 1) sets the pitch: `value_pitch_min` at 0 up to
+## `value_pitch_max` at 1, on top of `base_pitch`. Used for sounds that rise with an amount.
+@export var pitch_from_value := false
+@export_range(0.25, 4.0) var value_pitch_min := 0.8
+@export_range(0.25, 4.0) var value_pitch_max := 3.0
 ## Bus event that plays this cue (a signal name on Global_Manager_Events). Empty = manual only.
 @export var trigger_event: StringName

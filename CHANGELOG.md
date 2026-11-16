@@ -2,6 +2,12 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (last): menu rumble, and cues that follow an event's value
+
+- **Menu rumble** (new data): `Data/Rumble/menu_navigate`, `menu_confirm`, `menu_cancel` and `menu_adjust` buzz the pad very lightly on the four menu events, next to the menu sounds. All strengths are GUESS until felt. The rumble strength setting scales them, and 0 turns them off.
+- **Value-driven cues** (new): `Logic_Bus_Trigger.connect_trigger_value` passes an event's first argument to a cue. A sound cue with `pitch_from_value` takes its pitch from that value (0 to 1, between `value_pitch_min` and `value_pitch_max`); a rumble effect with `strength_from_value` scales its strength the same way. Used for a sound that rises as an amount grows. Tests: `Tests/test_bus_trigger_value.gd`.
+- A rumble test that used `menu_confirmed` as a stand-in trigger now uses `save_completed`, because the real menu buzz also listens to the menu events.
+Games started earlier: pull with `-Direction ToGame` (the menu rumble files arrive with it; delete them if the game wants no menu buzz).
 ## 2026-11-17 (final): triggers as gameplay buttons
 
 - `Logic_Input_Layout.axis_for_action` (new) and `TRIGGER_THRESHOLD`: Godot reports the triggers (ZL/ZR, LT/RT) as axes, not buttons, so an action can now be bound to a trigger. `Input_Source_Gamepad` reads such an action as pressed past the threshold. `count` is the right trigger. Games started earlier: pull with `-Direction ToGame`.

@@ -38,6 +38,24 @@ static func connect_trigger(bus: Object, event: StringName, action: Callable) ->
 	bus.connect(event, handler)
 	return handler
 
+## Like connect_trigger, but `action` takes ONE argument: the event's first argument, so a cue can
+## depend on a value (for example how big something is). Returns an invalid Callable if the event
+## does not exist or has no arguments.
+static func connect_trigger_value(bus: Object, event: StringName, action: Callable) -> Callable:
+	var arg_count := event_arg_count(bus, event)
+	if arg_count < 1 or arg_count > MAX_ARGS:
+		return Callable()
+	var handler: Callable
+	match arg_count:
+		1: handler = func(a) -> void: action.call(a)
+		2: handler = func(a, _b) -> void: action.call(a)
+		3: handler = func(a, _b, _c) -> void: action.call(a)
+		4: handler = func(a, _b, _c, _d) -> void: action.call(a)
+		5: handler = func(a, _b, _c, _d, _e) -> void: action.call(a)
+		_: handler = func(a, _b, _c, _d, _e, _f) -> void: action.call(a)
+	bus.connect(event, handler)
+	return handler
+
 static func disconnect_trigger(bus: Object, event: StringName, handler: Callable) -> void:
 	if handler.is_valid() and bus.is_connected(event, handler):
 		bus.disconnect(event, handler)

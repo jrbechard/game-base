@@ -58,7 +58,11 @@ func register_effect(fx: Data_Rumble_Effect) -> void:
 	_effects[fx.id] = fx
 	if fx.trigger_event == &"":
 		return
-	var handler := Logic_Bus_Trigger.connect_trigger(Global_Manager_Events, fx.trigger_event, _on_trigger.bind(fx))
+	var handler: Callable
+	if fx.strength_from_value:
+		handler = Logic_Bus_Trigger.connect_trigger_value(Global_Manager_Events, fx.trigger_event, _on_trigger_value.bind(fx))
+	else:
+		handler = Logic_Bus_Trigger.connect_trigger(Global_Manager_Events, fx.trigger_event, _on_trigger.bind(fx))
 	if not handler.is_valid():
 		push_warning("Rumble: effect '%s' triggers on '%s', which is not an event on the bus" % [fx.id, fx.trigger_event])
 		return
@@ -66,6 +70,14 @@ func register_effect(fx: Data_Rumble_Effect) -> void:
 
 func _on_trigger(fx: Data_Rumble_Effect) -> void:
 	_play_effect(fx, 1.0)
+
+# The event's value (0 to 1) scales the strength between the effect's minimum and its full strength.
+func _on_trigger_value(value: Variant, fx: Data_Rumble_Effect) -> void:
+	_play_effect(fx, gain_for_value(fx, float(value)))
+
+## The strength multiplier an effect uses for an event value (clamped to 0..1).
+static func gain_for_value(fx: Data_Rumble_Effect, value: float) -> float:
+	return lerpf(fx.value_strength_min, 1.0, clampf(value, 0.0, 1.0))
 
 # === Playing ===
 ## Fire a cue by hand. `gain` scales its strength (for example by how hard something hit).

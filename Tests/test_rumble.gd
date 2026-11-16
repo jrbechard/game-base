@@ -96,8 +96,8 @@ func test_stop_all_cancels_a_running_train_and_stops_the_pad() -> void:
 
 # === Bus wiring ===
 func test_event_without_arguments_fires_its_effect() -> void:
-	_fx(&"on_confirm", 0.4, 0.4, 0.03, 1, 0.03, &"menu_confirmed")
-	Global_Manager_Events.menu_confirmed.emit()
+	_fx(&"on_confirm", 0.4, 0.4, 0.03, 1, 0.03, &"save_completed")
+	Global_Manager_Events.save_completed.emit()
 	assert_eq(_calls.size(), 1)
 
 func test_event_with_arguments_fires_its_effect() -> void:
@@ -112,9 +112,9 @@ func test_unknown_trigger_event_warns_but_the_effect_still_plays_by_hand() -> vo
 	assert_eq(_calls.size(), 1)
 
 func test_registering_an_effect_again_does_not_double_fire() -> void:
-	_fx(&"on_confirm", 0.4, 0.4, 0.03, 1, 0.03, &"menu_confirmed")
-	_fx(&"on_confirm", 0.4, 0.4, 0.03, 1, 0.03, &"menu_confirmed")
-	Global_Manager_Events.menu_confirmed.emit()
+	_fx(&"on_confirm", 0.4, 0.4, 0.03, 1, 0.03, &"save_completed")
+	_fx(&"on_confirm", 0.4, 0.4, 0.03, 1, 0.03, &"save_completed")
+	Global_Manager_Events.save_completed.emit()
 	assert_eq(_calls.size(), 1)
 
 # === Settings and preview (step 4f-2) ===

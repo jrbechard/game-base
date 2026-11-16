@@ -60,7 +60,11 @@ func register_cue(cue: Data_Audio_Cue) -> void:
 	_cues[cue.id] = cue
 	if cue.trigger_event == &"":
 		return
-	var handler := Logic_Bus_Trigger.connect_trigger(Global_Manager_Events, cue.trigger_event, _on_trigger.bind(cue))
+	var handler: Callable
+	if cue.pitch_from_value:
+		handler = Logic_Bus_Trigger.connect_trigger_value(Global_Manager_Events, cue.trigger_event, _on_trigger_value.bind(cue))
+	else:
+		handler = Logic_Bus_Trigger.connect_trigger(Global_Manager_Events, cue.trigger_event, _on_trigger.bind(cue))
 	if not handler.is_valid():
 		push_warning("SFX: cue '%s' triggers on '%s', which is not an event on the bus" % [cue.id, cue.trigger_event])
 		return
@@ -68,6 +72,14 @@ func register_cue(cue: Data_Audio_Cue) -> void:
 
 func _on_trigger(cue: Data_Audio_Cue) -> void:
 	_play_cue(cue, 0.0)
+
+# The event's value (0 to 1) picks the pitch between the cue's two ends.
+func _on_trigger_value(value: Variant, cue: Data_Audio_Cue) -> void:
+	_play_cue(cue, 0.0, pitch_for_value(cue, float(value)))
+
+## The pitch multiplier a cue uses for an event value (clamped to 0..1).
+static func pitch_for_value(cue: Data_Audio_Cue, value: float) -> float:
+	return lerpf(cue.value_pitch_min, cue.value_pitch_max, clampf(value, 0.0, 1.0))
 
 # === Playing ===
 ## Play a cue by hand. Returns a voice id for stop(), or -1 if nothing played.
@@ -77,7 +89,7 @@ func play(id: StringName, volume_offset_db: float = 0.0) -> int:
 		return -1
 	return _play_cue(_cues[id], volume_offset_db)
 
-func _play_cue(cue: Data_Audio_Cue, volume_offset_db: float) -> int:
+func _play_cue(cue: Data_Audio_Cue, volume_offset_db: float, pitch_scale: float = 1.0) -> int:
 	if cue.streams.is_empty():
 		push_warning("SFX: cue '%s' has no streams" % cue.id)
 		return -1
@@ -88,7 +100,7 @@ func _play_cue(cue: Data_Audio_Cue, volume_offset_db: float) -> int:
 	_last_play_frame[cue.id] = frame
 
 	var stream: AudioStream = cue.streams[rng.randi() % cue.streams.size()]
-	var pitch := cue.base_pitch * rng.randf_range(1.0 - cue.pitch_range, 1.0 + cue.pitch_range)
+	var pitch := cue.base_pitch * pitch_scale * rng.randf_range(1.0 - cue.pitch_range, 1.0 + cue.pitch_range)
 	var bus := cue.bus
 	if not Logic_Audio_Buses.has_bus(bus):
 		if not _warned_missing_bus.has(cue.id):

@@ -72,3 +72,5 @@ tools/diff_against_base.ps1
 tools/sync_with_base.ps1
 Tests/test_grid_cursor.gd
 Tests/test_stopwatch.gd
+Tests/test_bus_trigger_value.gd
+Data/Rumble/menu_*
