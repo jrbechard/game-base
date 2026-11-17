@@ -11,3 +11,7 @@ default_font = ExtResource("1_inter")
 default_font_size = 32
 Label_Bold/base_type = &"Label"
 Label_Bold/fonts/font = SubResource("FontVariation_bold")
+Label_Small/base_type = &"Label"
+Label_Small/font_sizes/font_size = 24
+Button_Small/base_type = &"Button"
+Button_Small/font_sizes/font_size = 24

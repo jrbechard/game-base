@@ -96,3 +96,9 @@ Scripts/Shell/shell_screen_effect.gd
 Tests/test_screen_effect.gd
 Tests/test_save_requests.gd
 Scripts/UI/ui_level_bar.gd
+
+# Button pictures (Kenney Input Prompts, CC0) and mouse cursors (Kenney Cursor Pack, CC0)
+Assets/Prompts/
+Assets/Cursors/
+Tests/test_input_prompts.gd
+Tests/test_prompt_nodes.gd

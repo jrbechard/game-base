@@ -26,6 +26,8 @@ func _ready() -> void:
 	if _target == null:
 		push_warning("Component_Hover_Effect '%s': no Control to affect" % name)
 		return
+	if _target is BaseButton:
+		_target.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND  # the game's hand cursor
 	_rest_scale = _target.scale
 	_target.focus_entered.connect(_set_hovered.bind(true))
 	_target.focus_exited.connect(_set_hovered.bind(false))

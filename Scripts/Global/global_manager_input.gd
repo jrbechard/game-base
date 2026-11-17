@@ -47,6 +47,7 @@ func init() -> void:
 			func() -> int: return last_gamepad_device,
 			func() -> int: return gamepad_type)
 	source = _keyboard_source
+	Logic_Mouse_Cursors.apply()  # the game's own pointer, hand, pencil and eraser pictures
 	# Why: init may run more than once in tests; never connect twice.
 	if not Input.joy_connection_changed.is_connected(_on_joy_connection_changed):
 		Input.joy_connection_changed.connect(_on_joy_connection_changed)

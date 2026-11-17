@@ -3,7 +3,8 @@ extends Input_Source
 ## === Keyboard gameplay input ===
 ## GUESS: key choices are placeholders until JR picks bindings; remapping comes later.
 
-const _KEYS := {
+## Public so the button pictures (Logic_Input_Prompts) can be checked against the real bindings.
+const ACTION_KEYS := {
 	&"interact": [KEY_E, KEY_SPACE, KEY_ENTER],
 	&"cancel": [KEY_Q, KEY_BACKSPACE],
 	&"menu": [KEY_ESCAPE, KEY_TAB],
@@ -24,8 +25,8 @@ func poll() -> void:
 	var tmp := _prev
 	_prev = _curr
 	_curr = tmp
-	for action in _KEYS:
-		_curr[action] = _any_down(_KEYS[action])
+	for action in ACTION_KEYS:
+		_curr[action] = _any_down(ACTION_KEYS[action])
 
 func pressed(action: StringName) -> bool:
 	return _curr.get(action, false)

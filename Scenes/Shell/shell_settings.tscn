@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://Scripts/UI/shell_settings.gd" id="1"]
 [ext_resource type="Script" path="res://Scripts/Components/component_focus_navigator.gd" id="2"]
 [ext_resource type="Script" path="res://Scripts/Components/component_hover_effect.gd" id="3"]
 [ext_resource type="Script" path="res://Scripts/UI/ui_level_bar.gd" id="4"]
+[ext_resource type="Script" path="res://Scripts/UI/ui_prompt_line.gd" id="5"]
 
 [node name="Shell_Settings" type="Control"]
 layout_mode = 3
@@ -315,15 +316,18 @@ script = ExtResource("3")
 
 [node name="Label_Help" type="Label" parent="Column"]
 layout_mode = 2
+theme_type_variation = &"Label_Small"
 horizontal_alignment = 1
 
 [node name="Footer" type="HBoxContainer" parent="Column"]
 layout_mode = 2
 
-[node name="Label_Hints" type="Label" parent="Column/Footer"]
+[node name="Prompts_Hints" type="HBoxContainer" parent="Column/Footer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "ui_settings_hints"
+alignment = 0
+script = ExtResource("5")
+text_key = "ui_settings_hints"
 
 [node name="Button_Back" type="Button" parent="Column/Footer"]
 custom_minimum_size = Vector2(200, 44)

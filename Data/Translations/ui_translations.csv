@@ -16,7 +16,8 @@ ui_tab_sound,Sound,Son
 ui_tab_display,Display,Affichage
 ui_tab_controls,Controls,Commandes
 ui_tab_data,Data,Données
-ui_settings_hints,"Confirm · Back · L / R: switch tabs","Confirmer · Retour · L / R : changer d'onglet"
+ui_settings_hints,{interact} Confirm   {cancel} Back   {undo} {redo} Switch tab,{interact} Confirmer   {cancel} Retour   {undo} {redo} Changer d'onglet
+ui_hint_select,{interact} Select   {cancel} Back,{interact} Choisir   {cancel} Retour
 ui_help_volume_master,Overall loudness of the game.,Volume général du jeu.
 ui_help_volume_music,Loudness of the music.,Volume de la musique.
 ui_help_volume_sfx,Loudness of the sound effects.,Volume des effets sonores.

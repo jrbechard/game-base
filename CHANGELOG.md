@@ -2,6 +2,13 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (prompts and cursors): button pictures that follow the device, the game's own mouse cursors
+
+- **`Logic_Input_Prompts`** (pure: which picture for which action on which device; `{action}` tokens in hint text), **`UI_Prompt_Icon`** (one picture, follows keyboard, mouse and pad type by itself), **`UI_Prompt_Line`** (a hint line built from a translation such as `{interact} Select   {cancel} Back`; rebuilt when the language changes). The pictures are Kenney's Input Prompts (CC0): Switch, Xbox and keyboard sets in `Assets/Prompts/`. `Input_Source_Keyboard.ACTION_KEYS` is now public so tests can check the key pictures against the real bindings.
+- **`Logic_Mouse_Cursors`**: the game's own arrow, hand, busy, forbidden, pencil and eraser (Kenney's Cursor Pack, CC0, `Assets/Cursors/`), applied once by `Global_Manager_Input.init()`. `Component_Hover_Effect` makes buttons ask for the hand.
+- **Theme:** `Label_Small` and `Button_Small` styles (24 px; a game with a second font sets that font on them). The settings screen's footer is now a `UI_Prompt_Line` and its help line is `Label_Small`.
+- Hand-copied: `ui_translations.csv` (`ui_settings_hints` now uses tokens; new `ui_hint_select`). Tests: `Tests/test_input_prompts.gd`, `Tests/test_prompt_nodes.gd`. Games started earlier: pull with `-Direction ToGame`, then copy the two translation rows and add the two theme styles by hand.
+
 ## 2026-11-17 (fonts): Inter is the base's default font
 
 - **`Assets/Theming/theme_main.tres`** now sets Inter Regular (18 pt cut) as the default font, and a `Label_Bold` style (Inter Bold). The font files and their licence are in `Assets/Fonts/` (`Inter_18pt-Regular.ttf`, `Inter_18pt-Bold.ttf`, `OFL_Inter.txt`), listed in `tools/base_files.txt` by name so a game's own fonts in the same folder are never treated as base files. New: `docs/CREDITS.md` (the credits list every game keeps; Inter is its first line) and `Tests/test_theme_font.gd`.

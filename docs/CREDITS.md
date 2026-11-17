@@ -17,7 +17,12 @@ sold by themselves.
 
 ## Art
 
-None from outside.
+| Asset | Made by | Source | Licence | Where it is in the project |
+|---|---|---|---|---|
+| Input Prompts 1.5 (button, key and controller icons) | Kenney (www.kenney.nl) | https://kenney.nl/assets/input-prompts | CC0 1.0 | `Assets/Prompts/` (Switch, Xbox and keyboard sets, only the pictures the base uses) |
+| Cursor Pack 1.1 (mouse cursors) | Kenney (www.kenney.nl) | https://kenney.nl/assets/cursor-pack | CC0 1.0 | `Assets/Cursors/` (six cursors, Outline style) |
+
+CC0 needs no credit; Kenney asks only that you consider crediting "Kenney" or "www.kenney.nl", and the base does. The licence files sit next to the pictures.
 
 ## Sound
 
