@@ -74,3 +74,4 @@ Tests/test_grid_cursor.gd
 Tests/test_stopwatch.gd
 Tests/test_bus_trigger_value.gd
 Data/Rumble/menu_*
+Tests/test_background_job.gd

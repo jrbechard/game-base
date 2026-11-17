@@ -2,6 +2,9 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (step 6): a helper for slow work on a thread
+
+- **`Component_Background_Job`** (new): run slow, pure work on a thread and always show the latest result. `request(input)` as often as you like; it waits `debounce` seconds after the last request, runs one job at a time (requests that arrive meanwhile are merged), and emits `finished` only for the newest request, so a slow old answer can never overwrite a newer one. `cancel()` and `busy_changed` are there too. The work function must be pure (no nodes). Tests: `Tests/test_background_job.gd`. Games started earlier: pull with `-Direction ToGame`.
 ## 2026-11-17 (last): menu rumble, and cues that follow an event's value
 
 - **Menu rumble** (new data): `Data/Rumble/menu_navigate`, `menu_confirm`, `menu_cancel` and `menu_adjust` buzz the pad very lightly on the four menu events, next to the menu sounds. All strengths are GUESS until felt. The rumble strength setting scales them, and 0 turns them off.
