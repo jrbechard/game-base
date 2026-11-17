@@ -18,6 +18,9 @@ static func generate() -> void:
 	_save(_cat([_tone(660.0, 0.06, 0.3), _tone(990.0, 0.09, 0.3)]), "res://Assets/Audio/UI/menu_confirm.wav")
 	_save(_cat([_tone(660.0, 0.06, 0.3), _tone(440.0, 0.09, 0.3)]), "res://Assets/Audio/UI/menu_cancel.wav")
 	_save(_tone(900.0, 0.03, 0.22), "res://Assets/Audio/UI/menu_adjust.wav")
+	# A pause menu opening (a quick rise) and closing (the same, falling).
+	_save(_cat([_tone(500.0, 0.05, 0.28), _tone(750.0, 0.08, 0.28)]), "res://Assets/Audio/UI/menu_open.wav")
+	_save(_cat([_tone(750.0, 0.05, 0.28), _tone(500.0, 0.08, 0.28)]), "res://Assets/Audio/UI/menu_close.wav")
 	# Game cues (SFX bus).
 	_save(_cat([_tone(523.25, 0.07), _tone(659.25, 0.07), _tone(783.99, 0.07), _tone(1046.5, 0.2)]), "res://Assets/Audio/SFX/item_acquired.wav")
 	# Music loop: a soft pad. Whole cycles of every frequency fit in 4 s, so it loops without a click.

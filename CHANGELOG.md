@@ -2,6 +2,12 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (feel pass): pause menu sounds, magnetic 8-way walking
+
+- **Pause menu sounds:** new BASE bus events `menu_opened` and `menu_closed` (a game's pause menu emits them when it opens and closes) and two UI cues, `menu_open` and `menu_close` (generated placeholders; the placeholder sound tool writes them). `global_manager_events.gd` and the sound tool are copied by hand. Games started earlier: pull the cues and wavs with `-Direction ToGame`, add the two events by hand, and emit them from the pause menu.
+- **`Logic_Overworld_Move.walk_direction`** now eases the stick toward the 8 directions like a magnet (`SNAP_PULL`, a GUESS of 2.5; 1.0 = fully free): a stick a little off "right" walks exactly right, with no jump between directions. Tests extended in `Tests/test_overworld_move.gd`. Games started earlier: pull with `-Direction ToGame`.
+- Not brought over (Picrops-only): the footstep cue (`player_stepped`), the win sound on `puzzle_won`, the grid's opening grace, the editor's Change Size.
+
 ## 2026-11-17 (settings in tabs): a tabbed settings screen, like Picross S4
 
 - **`Shell_Settings`** is now tabs of rows (Sound, Display, Controls, Data). L and R (the input source's undo and redo) switch tabs; each row is a label with a control on its right; a help line explains the focused row. Rows name their setting with `setting_key` and their help text with `help`; each page names its tab with `tab_title`. The row list in `shell_settings.tscn` is per game (edit the rows; the script does not change). **`UI_Level_Bar`** (new): a stepped level shown as blocks, a `Range` so the navigator already steps it.

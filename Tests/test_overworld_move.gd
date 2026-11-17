@@ -66,6 +66,28 @@ func test_a_diagonal_is_no_faster_than_a_straight_line() -> void:
 	assert_almost_eq(Logic_Overworld_Move.walk_direction(Vector2(1, 0)).length(), 1.0, 0.001)
 	assert_almost_eq(Logic_Overworld_Move.walk_direction(Vector2(0.3, 0)).length(), 0.3, 0.001, "a gentle stick walks slowly")
 
+func test_the_directions_pull_the_stick_like_a_magnet() -> void:
+	# A stick a few degrees off "right" is pulled most of the way onto it (not necessarily all of it).
+	var near := Logic_Overworld_Move.walk_direction(Vector2.from_angle(deg_to_rad(4.0)))
+	assert_lt(absf(rad_to_deg(near.angle())), 1.0, "4 degrees off is pulled to under 1")
+	# Exactly on a direction stays there.
+	assert_almost_eq(rad_to_deg(Logic_Overworld_Move.walk_direction(Vector2(1, 1)).angle()), 45.0, 0.01)
+	# Halfway between two directions the stick is left alone: free angles still exist.
+	var between := Logic_Overworld_Move.walk_direction(Vector2.from_angle(deg_to_rad(22.0)))
+	assert_almost_eq(rad_to_deg(between.angle()), 22.0, 1.0)
+	assert_eq(Logic_Overworld_Move.walk_direction(Vector2.ZERO), Vector2.ZERO)
+
+func test_the_pull_never_jumps_between_directions() -> void:
+	# Turning the stick a little never turns the walk by a lot, also across the halfway point.
+	var last := Logic_Overworld_Move.walk_direction(Vector2.from_angle(0.0)).angle()
+	for i in range(1, 361):
+		var now := Logic_Overworld_Move.walk_direction(Vector2.from_angle(deg_to_rad(float(i)))).angle()
+		assert_lt(absf(angle_difference(last, now)), deg_to_rad(4.0), "no jump at %d degrees" % i)
+		last = now
+
+func test_the_pull_keeps_the_stick_strength() -> void:
+	assert_almost_eq(Logic_Overworld_Move.walk_direction(Vector2(0.3, 0.05)).length(), 0.304, 0.01)
+
 # === Reach ===
 func test_the_nearest_thing_in_reach_wins() -> void:
 	var points := PackedVector2Array([Vector2(100, 0), Vector2(40, 0), Vector2(500, 0)])

@@ -38,6 +38,10 @@ signal menu_confirmed
 signal menu_cancelled
 ## A slider or chooser was adjusted with Left/Right (silent at its limit).
 signal menu_adjusted
+## A pause menu opened over the game. Audio listens.
+signal menu_opened
+## A pause menu closed and the game carries on.
+signal menu_closed
 
 # === Settings ===
 ## Intent: a screen asks for a setting to change. Only Global_Manager_Settings acts on it.

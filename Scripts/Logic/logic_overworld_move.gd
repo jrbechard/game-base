@@ -5,10 +5,26 @@ extends RefCounted
 ## (Vector2i cell) -> bool. Each axis moves on its own, so a diagonal push against a wall
 ## slides along it instead of sticking.
 
-## The direction to walk: the stick or keys as given, never longer than 1, so a diagonal is
-## no faster than a straight line. A weak stick keeps its small size (slow walking).
+## GUESS: how strongly the 8 directions pull the stick. 1 = no pull (fully free), higher = a wider
+## and stronger magnet around each direction, and a loose stick between them.
+const SNAP_PULL := 2.5
+
+## The direction to walk: the stick or keys, eased toward the 8 directions like a magnet. Close to
+## right (or up, or a diagonal) it lands exactly on it; further away it blends smoothly into free
+## angles, with no sudden jump between directions. Never longer than 1, so a diagonal is no faster
+## than a straight line. A weak stick keeps its small size (slow walking).
 static func walk_direction(input: Vector2) -> Vector2:
-	return input.limit_length(1.0)
+	var strength := minf(input.length(), 1.0)
+	if is_zero_approx(strength):
+		return Vector2.ZERO
+	var step := TAU / 8.0
+	var angle := input.angle()
+	var nearest := roundf(angle / step) * step
+	var offset := angle - nearest                      # -step/2 .. step/2 away from the direction
+	var closeness := absf(offset) / (step * 0.5)       # 0 on the direction, 1 halfway to the next one
+	# The pull shrinks the offset near a direction and leaves it whole halfway between two.
+	var eased := offset * pow(closeness, SNAP_PULL - 1.0)
+	return Vector2.from_angle(nearest + eased) * strength
 
 ## A long step (a frame hitch) is cut into pieces of at most half a tile, so it can never jump over
 ## a wall and always ends flush against the first one it meets.
