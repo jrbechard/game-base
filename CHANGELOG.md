@@ -2,6 +2,9 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (CRT overlay): one CRT layer over every screen
+
+- **`Shell_Screen_Effect`** (new): a `Screen_Effect` layer in Main (above screens and overlays, below the transition) draws the CRT shader over whatever screen is showing. Strength is the new `screen_effect` setting (0 = off and the overlay is hidden, 1 = full), set from a slider in the settings screen through the usual bus intent; the look is Ever Blue's in-game one. It stays hidden until `splash_finished` when a splash plays, since the splash has its own CRT. Tests: `Tests/test_screen_effect.gd`. Main's scene and script were edited by hand (Main is not synced). Games started earlier: pull with `-Direction ToGame`, then add the layer to Main like the base's.
 ## 2026-11-17 (step 7): areas as text, free top-down movement
 
 - **`Logic_Area_Map`** (new): a screen of tiles as text (`#` wall, `.` floor, rows joined with `/`), 60 px tiles so 32 x 18 fills 1920 x 1080; everything outside is solid. **`Logic_Overworld_Move`** (new): free top-down walking against tiles. Each axis moves on its own so a diagonal push slides along a wall, long steps are cut into half-tile pieces so nothing tunnels, `walk_direction` keeps a diagonal no faster than a straight line, and `nearest_in_reach` picks what a press acts on. **`Logic_Csv_Rows`** (new): reads a data sheet into rows, for Generate_ scripts. Tests: `Tests/test_overworld_move.gd`.

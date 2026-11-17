@@ -20,6 +20,8 @@ const DEFAULTS := {
 	## How long a held direction waits before it starts repeating (a slider, 0..1; see
 	## Logic_Stick_Repeat.delay_for_setting). GUESS: 0.5 is the 0.35 s the menus used before.
 	&"hold_delay": 0.5,
+	## Strength of the CRT overlay, 0 = off, 1 = full (Ever Blue's default look).
+	&"screen_effect": 1.0,
 	&"reduce_motion": false,
 }
 

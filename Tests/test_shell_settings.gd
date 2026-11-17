@@ -127,7 +127,7 @@ func test_a_mouse_click_on_the_toggle_is_not_toggled_twice() -> void:
 # French labels are longer than English ones; the controls must still line up in one column.
 func test_controls_line_up_in_every_language() -> void:
 	await _open()
-	var keys := [&"volume_master", &"volume_music", &"volume_sfx", &"volume_ui", &"rumble_scale", &"hold_delay", &"language", &"reduce_motion"]
+	var keys := [&"volume_master", &"volume_music", &"volume_sfx", &"volume_ui", &"rumble_scale", &"hold_delay", &"screen_effect", &"language", &"reduce_motion"]
 	for language in [&"en", &"fr"]:
 		Global_Manager_Settings.set_value(&"language", language)
 		await wait_process_frames(3)

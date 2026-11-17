@@ -1,7 +1,37 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://Scripts/Global/main.gd" id="1"]
 [ext_resource type="PackedScene" path="res://Scenes/Shell/shell_empty.tscn" id="2"]
+[ext_resource type="Script" path="res://Scripts/Shell/shell_screen_effect.gd" id="6"]
+[ext_resource type="Shader" path="res://Shaders/Screen/screen_crt.gdshader" id="7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
+shader = ExtResource("7")
+shader_parameter/is_pointer = false
+shader_parameter/curvature = 8.0000001425
+shader_parameter/overscan = 1.0
+shader_parameter/vignette_multiplier = 0.250000011875
+shader_parameter/scanline_opacity = 0.050000002375
+shader_parameter/scanline_lightness = 0.99999998090814
+shader_parameter/scanline_count = 108.0
+shader_parameter/aberration_x = 1.0000005225000006
+shader_parameter/aberration_y = 1.0000005225000006
+shader_parameter/halation_threshold = 0.50000002375
+shader_parameter/halation_intensity = 0.10000000475
+shader_parameter/halation_radius = 1.0000000475
+shader_parameter/halation_color = Color(1, 0.68235296, 0.101960786, 1)
+shader_parameter/pixelate_enabled = false
+shader_parameter/virtual_resolution = Vector2(1920, 1080)
+shader_parameter/mask_type = 6
+shader_parameter/mask_cell_size = 1.0
+shader_parameter/mask_cell_aspect = 2.000000083125
+shader_parameter/mask_roundness = 1.0
+shader_parameter/mask_stagger = 0.5
+shader_parameter/mask_brightness = 0.50000002375
+shader_parameter/phosphor_intensity = 0.30000001425
+shader_parameter/phosphor_glow = 1.0000000475
+shader_parameter/phosphor_glow_radius = 0.80000001425
+shader_parameter/effect_intensity = 1.0
 
 [node name="Main" type="Node"]
 script = ExtResource("1")
@@ -12,6 +42,19 @@ layer = 0
 
 [node name="Overlay_Host" type="CanvasLayer" parent="."]
 layer = 10
+
+[node name="Screen_Effect" type="CanvasLayer" parent="."]
+layer = 50
+script = ExtResource("6")
+
+[node name="Effect_Rect" type="ColorRect" parent="Screen_Effect"]
+material = SubResource("ShaderMaterial_crt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Transition" type="CanvasLayer" parent="."]
 layer = 100

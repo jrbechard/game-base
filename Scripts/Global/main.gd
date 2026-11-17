@@ -5,6 +5,7 @@ extends Node
 ## Optional company splash shown before the first screen (empty = go straight to it).
 @export var splash: PackedScene
 @onready var _screen_host: Node = $Screen_Host
+@onready var _screen_effect: Shell_Screen_Effect = $Screen_Effect
 
 func _ready() -> void:
 	# Why: explicit order instead of relying on autoload _ready order.
@@ -20,10 +21,12 @@ func _ready() -> void:
 	Global_Manager_Music.init()
 	Global_Manager_Settings.init()  # last of the audio and rumble managers, so it can apply to all of them
 	Global_Manager_Scenes.init(_screen_host)
+	_screen_effect.init(Global_Manager_Settings.get_value(&"screen_effect"))
 	if splash == null:
 		Global_Manager_Scenes.change_screen(first_screen, &"shell_empty")
 		return
 	# The company splash plays first and announces splash_finished; then the first screen opens.
+	_screen_effect.hold_until(Global_Manager_Events.splash_finished)  # the splash has its own CRT
 	Global_Manager_Events.splash_finished.connect(_on_splash_finished, CONNECT_ONE_SHOT)
 	Global_Manager_Scenes.change_screen(splash, &"shell_splash")
 
