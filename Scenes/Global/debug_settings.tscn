@@ -6,6 +6,7 @@
 
 [node name="Debug_Settings" instance=ExtResource("1")]
 first_screen = ExtResource("2")
+splash = null
 
 [node name="Debug_Music_Starter" type="Node" parent="." index="4"]
 script = ExtResource("3")

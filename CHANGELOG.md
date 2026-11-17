@@ -2,6 +2,12 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (step 7): areas as text, free top-down movement
+
+- **`Logic_Area_Map`** (new): a screen of tiles as text (`#` wall, `.` floor, rows joined with `/`), 60 px tiles so 32 x 18 fills 1920 x 1080; everything outside is solid. **`Logic_Overworld_Move`** (new): free top-down walking against tiles. Each axis moves on its own so a diagonal push slides along a wall, long steps are cut into half-tile pieces so nothing tunnels, `walk_direction` keeps a diagonal no faster than a straight line, and `nearest_in_reach` picks what a press acts on. **`Logic_Csv_Rows`** (new): reads a data sheet into rows, for Generate_ scripts. Tests: `Tests/test_overworld_move.gd`.
+- `Global_Manager_Scenes.change_screen` now returns the new screen, and `current_screen()` returns the one showing (backward compatible).
+- Debug scenes that instance Main now set `splash = null`, so the company splash does not play in front of them.
+Games started earlier: pull with `-Direction ToGame`.
 ## 2026-11-17 (company splash): the Club Cabanon splash
 
 - **`Shell_Splash`** (new, ported from Pogne): the Club Cabanon logo spins faster and faster with afterimage trails and a rising whoosh, the company sound plays, then a white-out. Any key, pad button or click skips it. It announces the new bus event `splash_finished`; Main opens the first screen then. Set Main's new `splash` export to `shell_splash.tscn` to use it (empty = no splash, so older games keep booting as before). Also new: `Transition_Fade` (reusable full-screen fade), the CRT and metal shaders, the logo model, the two sounds and the `splash_whoosh` cue. `Global_Manager_SFX.play` gained an optional pitch multiplier. Differences from Pogne: no SFX-bus volume ride (a skip fades the stinger and cuts the whooshes). Tests: `Tests/test_splash.gd`. Games started earlier: pull with `-Direction ToGame`, then hook Main like the base's.

@@ -85,3 +85,7 @@ Assets/Models/Shell/ClubCabanon_Logo.obj
 Assets/Audio/SFX/splash_*.wav
 Data/Audio/Cues/splash_whoosh.tres
 Tests/test_splash.gd
+Scripts/Logic/logic_area_map.gd
+Scripts/Logic/logic_overworld_move.gd
+Scripts/Logic/logic_csv_rows.gd
+Tests/test_overworld_move.gd
