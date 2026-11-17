@@ -25,7 +25,7 @@ signal adjusted(control: Control, direction: int)
 ## Control focused by focus_default(). Empty = the first focusable control.
 @export var default_focus: Control
 ## Wrap to the far end of a row or column instead of stopping at the edge.
-@export var wrap := false
+@export var wrap_around := false
 ## Off while a screen animates in or out, so input does nothing until it settles.
 @export var enabled := true
 ## Left and Right step a focused slider instead of moving focus.
@@ -93,7 +93,7 @@ func _move(side: Side) -> void:
 	var next := _remembered(current, side)
 	if next == null:
 		next = _neighbor(current, side)
-	if next == null and wrap:
+	if next == null and wrap_around:
 		next = _far_end(current, _opposite(side))
 	if next == null or next == current:
 		return  # at an edge: no move, no sound

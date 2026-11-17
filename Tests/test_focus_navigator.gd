@@ -73,7 +73,7 @@ func test_disabled_controls_are_skipped() -> void:
 	assert_eq(_nav.focused_control(), _b["C"])
 
 func test_wrap_goes_to_the_far_end() -> void:
-	_nav.wrap = true
+	_nav.wrap_around = true
 	_b["C"].grab_focus()
 	_press(&"ui_right")
 	assert_eq(_nav.focused_control(), _b["A"])

@@ -4,6 +4,8 @@ Newest first. One entry per upgrade of the base: what changed, which game it cam
 
 ## 2026-11-17 (editor warnings): GDScript warnings cleared
 
+- **`Component_Focus_Navigator.wrap` is now `wrap_around`** (the old name was the same as a built-in function). Games started earlier: pull with `-Direction ToGame`, and rename `wrap` to `wrap_around` anywhere a scene or script sets it.
+
 - Fixed the editor's GDScript warnings in `global_manager_input.gd` (the pad and keyboard sources are now cast to `Input_Source` in a ternary), `logic_stopwatch.gd` and `debug_tile_test.gd` (intended integer divisions are marked `@warning_ignore("integer_division")`). No behaviour change. Games started earlier: pull with `-Direction ToGame`.
 
 ## 2026-11-17 (prompts and cursors): button pictures that follow the device, the game's own mouse cursors
