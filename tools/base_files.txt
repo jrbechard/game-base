@@ -92,3 +92,4 @@ Tests/test_overworld_move.gd
 Scripts/Shell/shell_screen_effect.gd
 Tests/test_screen_effect.gd
 Tests/test_save_requests.gd
+Scripts/UI/ui_level_bar.gd

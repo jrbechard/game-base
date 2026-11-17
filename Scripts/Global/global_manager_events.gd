@@ -61,6 +61,12 @@ signal load_completed(success: bool)
 signal flow_requested(target: StringName)
 ## Intent: write the save file now (leaving to the title, quitting) instead of waiting for the autosave.
 signal save_requested
+## Intent: delete what the player has earned (the settings screen's Delete save data, after its question).
+## The game's progress manager answers it; the screen then asks `save_requested` so the empty state is written.
+signal save_reset_requested
+## Intent: put every setting back to its default (the settings screen's Restore default settings).
+## Only Global_Manager_Settings acts on it.
+signal settings_reset_requested
 
 # ==========================================================================
 # GAME EVENTS (per game; the two below are a worked example)

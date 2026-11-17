@@ -12,3 +12,27 @@ ui_reduce_motion,Reduce motion,Réduire les animations
 ui_back,Back,Retour
 ui_on,On,Activé
 ui_off,Off,Désactivé
+ui_tab_sound,Sound,Son
+ui_tab_display,Display,Affichage
+ui_tab_controls,Controls,Commandes
+ui_tab_data,Data,Données
+ui_settings_hints,"Confirm · Back · L / R: switch tabs","Confirmer · Retour · L / R : changer d'onglet"
+ui_help_volume_master,Overall loudness of the game.,Volume général du jeu.
+ui_help_volume_music,Loudness of the music.,Volume de la musique.
+ui_help_volume_sfx,Loudness of the sound effects.,Volume des effets sonores.
+ui_help_volume_ui,Loudness of the menu sounds.,Volume des sons des menus.
+ui_help_language,Language of all menus and text.,Langue des menus et des textes.
+ui_help_screen_effect,Strength of the old-screen look. Off at zero.,Force de l'effet vieil écran. Désactivé à zéro.
+ui_help_reduce_motion,Turns menu animations off.,Désactive les animations des menus.
+ui_help_rumble_scale,How strongly the controller buzzes.,Intensité des vibrations de la manette.
+ui_help_hold_delay,How long a held direction waits before it repeats.,Délai avant la répétition d'une direction maintenue.
+ui_help_restore,Put every setting back to its default.,Remet tous les paramètres par défaut.
+ui_help_delete,Erase your saved game. Asks first.,Efface votre partie sauvegardée. Demande confirmation.
+ui_help_delete_no,Keep your saved game.,Garder votre partie.
+ui_help_delete_yes,Erase your saved game for good.,Effacer votre partie pour de bon.
+ui_help_back,Close the settings.,Fermer les paramètres.
+ui_data_restore,Restore default settings,Rétablir les paramètres par défaut
+ui_data_delete,Delete save data,Supprimer la sauvegarde
+ui_data_delete_question,"Erase your saved game? This cannot be undone.","Effacer votre partie? Cette action est irréversible."
+ui_data_delete_no,"No, keep my game","Non, garder ma partie"
+ui_data_delete_yes,"Yes, erase it","Oui, l'effacer"

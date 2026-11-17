@@ -2,6 +2,12 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (settings in tabs): a tabbed settings screen, like Picross S4
+
+- **`Shell_Settings`** is now tabs of rows (Sound, Display, Controls, Data). L and R (the input source's undo and redo) switch tabs; each row is a label with a control on its right; a help line explains the focused row. Rows name their setting with `setting_key` and their help text with `help`; each page names its tab with `tab_title`. The row list in `shell_settings.tscn` is per game (edit the rows; the script does not change). **`UI_Level_Bar`** (new): a stepped level shown as blocks, a `Range` so the navigator already steps it.
+- The Data tab: Restore default settings (new BASE intent `settings_reset_requested`, answered by `Global_Manager_Settings.reset_to_defaults()`) and Delete save data (asks first, then sends the new BASE intent `save_reset_requested`, which the game's progress manager answers, then `save_requested`). `ui_translations.csv` and `global_manager_events.gd` are copied by hand: the tab, help and data keys and the two events were added to the base's copies.
+- Tests: `Tests/test_shell_settings.gd` extended (tabs, L/R, help line, level bars, restore, delete question). Games started earlier: pull with `-Direction ToGame`, add the two events and the translation rows by hand, and make the game's `save_reset_requested` handler reset its progress.
+
 ## 2026-11-17 (boot flow): save on request, settings over any screen
 
 - **`Global_Manager_Save`**: `save_exists()` (true when a save or its backup is on disk) and it now writes at once on the new bus intent `save_requested`, so leaving to a title or quitting never waits on the autosave timer. New BASE bus events `flow_requested(target)` (the intent screens send to move the game between its big states; the game's flow manager acts on it) and `save_requested`. Tests: `Tests/test_save_requests.gd`.

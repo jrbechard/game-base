@@ -38,6 +38,8 @@ func init(path: String = DEFAULT_PATH) -> void:
 	_dirty = false
 	if not Global_Manager_Events.setting_change_requested.is_connected(_on_change_requested):
 		Global_Manager_Events.setting_change_requested.connect(_on_change_requested)
+	if not Global_Manager_Events.settings_reset_requested.is_connected(reset_to_defaults):
+		Global_Manager_Events.settings_reset_requested.connect(reset_to_defaults)
 	var saved := Logic_Json_File.read(path, "settings")
 	state.reset()
 	if not saved.is_empty():
@@ -72,6 +74,11 @@ func set_value(key: StringName, value: Variant) -> bool:
 
 func _on_change_requested(key: StringName, value: Variant) -> void:
 	set_value(key, value)
+
+## Every setting back to its default, each one announced so screens and audio follow.
+func reset_to_defaults() -> void:
+	for key in State_Settings.DEFAULTS:
+		set_value(key, State_Settings.DEFAULTS[key])
 
 # What this manager owns. Rumble strength is applied by the rumble manager from the event.
 func _apply(key: StringName, value: Variant) -> void:
