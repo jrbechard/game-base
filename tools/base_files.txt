@@ -75,3 +75,13 @@ Tests/test_stopwatch.gd
 Tests/test_bus_trigger_value.gd
 Data/Rumble/menu_*
 Tests/test_background_job.gd
+Scenes/Shell/shell_splash.tscn
+Scripts/Shell/shell_splash.gd
+Scenes/Transitions/transition_fade.tscn
+Scripts/Transitions/transition_fade.gd
+Shaders/Screen/screen_crt.gdshader
+Shaders/VFX/vfx_metal.gdshader
+Assets/Models/Shell/ClubCabanon_Logo.obj
+Assets/Audio/SFX/splash_*.wav
+Data/Audio/Cues/splash_whoosh.tres
+Tests/test_splash.gd

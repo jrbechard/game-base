@@ -83,11 +83,12 @@ static func pitch_for_value(cue: Data_Audio_Cue, value: float) -> float:
 
 # === Playing ===
 ## Play a cue by hand. Returns a voice id for stop(), or -1 if nothing played.
-func play(id: StringName, volume_offset_db: float = 0.0) -> int:
+## `pitch_scale` multiplies the cue's pitch (used by the splash whoosh, which rises as it speeds up).
+func play(id: StringName, volume_offset_db: float = 0.0, pitch_scale: float = 1.0) -> int:
 	if not _cues.has(id):
 		push_warning("SFX: no cue with id '%s'" % id)
 		return -1
-	return _play_cue(_cues[id], volume_offset_db)
+	return _play_cue(_cues[id], volume_offset_db, pitch_scale)
 
 func _play_cue(cue: Data_Audio_Cue, volume_offset_db: float, pitch_scale: float = 1.0) -> int:
 	if cue.streams.is_empty():

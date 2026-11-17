@@ -2,6 +2,8 @@ extends Node
 ## === Main: almost empty. Starts the autoloads in a fixed order, then opens the shell. ===
 
 @export var first_screen: PackedScene
+## Optional company splash shown before the first screen (empty = go straight to it).
+@export var splash: PackedScene
 @onready var _screen_host: Node = $Screen_Host
 
 func _ready() -> void:
@@ -18,4 +20,12 @@ func _ready() -> void:
 	Global_Manager_Music.init()
 	Global_Manager_Settings.init()  # last of the audio and rumble managers, so it can apply to all of them
 	Global_Manager_Scenes.init(_screen_host)
+	if splash == null:
+		Global_Manager_Scenes.change_screen(first_screen, &"shell_empty")
+		return
+	# The company splash plays first and announces splash_finished; then the first screen opens.
+	Global_Manager_Events.splash_finished.connect(_on_splash_finished, CONNECT_ONE_SHOT)
+	Global_Manager_Scenes.change_screen(splash, &"shell_splash")
+
+func _on_splash_finished() -> void:
 	Global_Manager_Scenes.change_screen(first_screen, &"shell_empty")

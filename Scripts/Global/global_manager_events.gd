@@ -16,6 +16,8 @@ extends Node
 # === Scenes ===
 ## A screen finished swapping into Screen_Host.
 signal scene_changed(scene_id: StringName)
+## The company splash has played (or was skipped) and is done. Main then opens the first screen.
+signal splash_finished
 
 # === Input ===
 ## The player switched between keyboard, gamepad and mouse (mode is Global_Manager_Input.DeviceMode).

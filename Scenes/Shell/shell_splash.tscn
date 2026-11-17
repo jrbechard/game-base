@@ -1,0 +1,138 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Shader" path="res://Shaders/Screen/screen_crt.gdshader" id="1_crt"]
+[ext_resource type="Script" path="res://Scripts/Shell/shell_splash.gd" id="1_script"]
+[ext_resource type="ArrayMesh" path="res://Assets/Models/Shell/ClubCabanon_Logo.obj" id="1_logo"]
+[ext_resource type="Shader" path="res://Shaders/VFX/vfx_metal.gdshader" id="2_metal"]
+[ext_resource type="PackedScene" path="res://Scenes/Transitions/transition_fade.tscn" id="4_fade"]
+[ext_resource type="AudioStream" path="res://Assets/Audio/SFX/splash_clubcabanon.wav" id="6_stinger"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_metal"]
+render_priority = 0
+shader = ExtResource("2_metal")
+shader_parameter/baseColor = Color(1, 1, 1, 1)
+shader_parameter/gradientBasis = Vector3(3, 3, 3)
+shader_parameter/gradientBasisDistort = Vector3(0, 0, 0)
+shader_parameter/gradientBasisSpeed = 0.0
+shader_parameter/refractionSplit = 2.0
+shader_parameter/refractionSplitPower = 1.0
+shader_parameter/refractionAffect = 0.8
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/rim_power = 3.0
+shader_parameter/rim_intensity = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_crt"]
+shader = ExtResource("1_crt")
+shader_parameter/is_pointer = false
+shader_parameter/curvature = 5.0
+shader_parameter/overscan = 1.050000002375
+shader_parameter/vignette_multiplier = 0.6000000285
+shader_parameter/scanline_opacity = 0.050000002375
+shader_parameter/scanline_lightness = 0.99999998090814
+shader_parameter/scanline_count = 108.0
+shader_parameter/aberration_x = 1.0000005225000006
+shader_parameter/aberration_y = 1.0000005225000006
+shader_parameter/halation_threshold = 0.6
+shader_parameter/halation_intensity = 0.4
+shader_parameter/halation_radius = 3.0
+shader_parameter/halation_color = Color(0.27752772, 0.27752772, 0.27752772, 1)
+shader_parameter/pixelate_enabled = false
+shader_parameter/virtual_resolution = Vector2(1920, 1080)
+shader_parameter/mask_type = 6
+shader_parameter/mask_cell_size = 1.0
+shader_parameter/mask_cell_aspect = 2.000000083125
+shader_parameter/mask_roundness = 1.0
+shader_parameter/mask_stagger = 0.5
+shader_parameter/mask_brightness = 0.50000002375
+shader_parameter/phosphor_intensity = 0.5
+shader_parameter/phosphor_glow = 0.6
+shader_parameter/phosphor_glow_radius = 1.5
+shader_parameter/effect_intensity = 1.0
+
+[node name="Shell_Splash" type="Node"]
+script = ExtResource("1_script")
+start_spin_speed = 0.15
+peak_spin_speed = 9.0
+spin_duration = 5.0
+whoosh_phase_offset = 2.0
+whoosh_pitch_min = 1.0
+whoosh_pitch_max = 2.0
+whoosh_speed_for_max_pitch = 30.0
+max_whooshes_per_frame = 3
+stinger_delay = 0.0
+stinger_volume_db = -2.0
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Live_Viewport" type="SubViewport" parent="."]
+transparent_bg = true
+use_taa = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Live_Viewport"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 0, 0)
+current = true
+fov = 60.0
+
+[node name="Logo_Pivot" type="Node3D" parent="Live_Viewport"]
+transform = Transform3D(0.83867055, 0, 0.54463905, 0, 1, 0, -0.54463905, 0, 0.83867055, 0, 0, 0)
+
+[node name="Logo" type="MeshInstance3D" parent="Live_Viewport/Logo_Pivot"]
+mesh = ExtResource("1_logo")
+surface_material_override/0 = SubResource("ShaderMaterial_metal")
+
+[node name="Accum_Viewport" type="SubViewport" parent="."]
+transparent_bg = true
+use_taa = true
+size = Vector2i(1920, 1080)
+render_target_clear_mode = 1
+render_target_update_mode = 4
+
+[node name="Fade_Quad" type="ColorRect" parent="Accum_Viewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.15686275)
+
+[node name="Live_Display" type="TextureRect" parent="Accum_Viewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Trail_Display" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Transition_Fade" parent="." instance=ExtResource("4_fade")]
+
+[node name="Screen" type="CanvasLayer" parent="."]
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Screen"]
+copy_mode = 2
+
+[node name="Screen_Effects" type="ColorRect" parent="Screen"]
+material = SubResource("ShaderMaterial_crt")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Stinger_Player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_stinger")
+bus = &"SFX"
