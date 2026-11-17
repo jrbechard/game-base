@@ -2,6 +2,11 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (fonts): Inter is the base's default font
+
+- **`Assets/Theming/theme_main.tres`** now sets Inter Regular (18 pt cut) as the default font, and a `Label_Bold` style (Inter Bold). The font files and their licence are in `Assets/Fonts/` (`Inter_18pt-Regular.ttf`, `Inter_18pt-Bold.ttf`, `OFL_Inter.txt`), listed in `tools/base_files.txt` by name so a game's own fonts in the same folder are never treated as base files. New: `docs/CREDITS.md` (the credits list every game keeps; Inter is its first line) and `Tests/test_theme_font.gd`.
+- A game that wants another font replaces `default_font` in its own `theme_main.tres` and adds that file to its `tools/game_exclusions.txt` (Picrops does, with Darumadrop One and Sniglet). Games started earlier keep their theme; pull the font files only if you want Inter.
+
 ## 2026-11-17 (feel pass): pause menu sounds, magnetic 8-way walking
 
 - **Pause menu sounds:** new BASE bus events `menu_opened` and `menu_closed` (a game's pause menu emits them when it opens and closes) and two UI cues, `menu_open` and `menu_close` (generated placeholders; the placeholder sound tool writes them). `global_manager_events.gd` and the sound tool are copied by hand. Games started earlier: pull the cues and wavs with `-Direction ToGame`, add the two events by hand, and emit them from the pause menu.

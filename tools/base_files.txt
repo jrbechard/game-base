@@ -53,6 +53,9 @@ Data/UI/Animations/
 Data/Audio/Cues/menu_*
 
 Assets/Theming/
+# Inter is the base's default font. Only these files: a game's own fonts live in the same folder.
+Assets/Fonts/Inter_*
+Assets/Fonts/OFL_Inter.txt
 Assets/SVG/tiles_test.svg
 Assets/Audio/UI/
 

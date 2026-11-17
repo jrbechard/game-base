@@ -1,4 +1,13 @@
-[gd_resource type="Theme" format=3]
+[gd_resource type="Theme" load_steps=3 format=3]
+
+[ext_resource type="FontFile" path="res://Assets/Fonts/Inter_18pt-Regular.ttf" id="1_inter"]
+[ext_resource type="FontFile" path="res://Assets/Fonts/Inter_18pt-Bold.ttf" id="2_inter_bold"]
+
+[sub_resource type="FontVariation" id="FontVariation_bold"]
+base_font = ExtResource("2_inter_bold")
 
 [resource]
+default_font = ExtResource("1_inter")
 default_font_size = 32
+Label_Bold/base_type = &"Label"
+Label_Bold/fonts/font = SubResource("FontVariation_bold")
