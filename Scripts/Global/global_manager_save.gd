@@ -25,6 +25,8 @@ func init(states: Array, path: String = DEFAULT_PATH) -> void:
 	_timer.wait_time = AUTOSAVE_DELAY
 	if not Global_Manager_Events.state_changed.is_connected(_on_state_changed):
 		Global_Manager_Events.state_changed.connect(_on_state_changed)
+	if not Global_Manager_Events.save_requested.is_connected(save_now):
+		Global_Manager_Events.save_requested.connect(save_now)
 
 # === Autosave ===
 func _on_state_changed(_state_key: StringName) -> void:
@@ -34,6 +36,10 @@ func _notification(what: int) -> void:
 	# Why: never lose a change made just before the window closes.
 	if what == NOTIFICATION_WM_CLOSE_REQUEST and _timer != null and not _timer.is_stopped():
 		save_now()
+
+## True when a save file exists (the title menu shows Continue only then).
+func save_exists() -> bool:
+	return FileAccess.file_exists(save_path) or FileAccess.file_exists(save_path + ".bak")
 
 # === Write ===
 func save_now() -> bool:

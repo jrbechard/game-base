@@ -10,6 +10,7 @@ extends Control
 ## The player asked to leave (Back, or cancel). Global_Manager_Scenes will act on this later.
 signal back_requested
 
+const SCENE_PATH := "res://Scenes/Shell/shell_settings.tscn"  # loaded on use: the scene uses this script
 const LANGUAGE_NAMES := {&"en": "English", &"fr": "Français"}
 
 @onready var _nav: Component_Focus_Navigator = $Component_Focus_Navigator
@@ -98,3 +99,18 @@ func _show(key: StringName, value: Variant) -> void:
 # A button that stays pressed (on) or released (off): the reduce-motion switch.
 func _is_toggle(control: Control) -> bool:
 	return control is BaseButton and (control as BaseButton).toggle_mode
+
+## Open the settings screen on top of `parent` (a Control), with a plain backdrop so the screen
+## underneath does not show through. `on_close` runs after Back, once the settings are gone.
+## Used by every screen that offers Settings (title, pause, puzzle pause).
+static func open_over(parent: Control, on_close: Callable) -> void:
+	var backdrop := ColorRect.new()
+	backdrop.color = Color(0.1, 0.11, 0.16, 1.0)
+	backdrop.set_anchors_preset(Control.PRESET_FULL_RECT)
+	parent.add_child(backdrop)
+	var settings: Shell_Settings = (load(SCENE_PATH) as PackedScene).instantiate()
+	parent.add_child(settings)
+	settings.back_requested.connect(func() -> void:
+		settings.queue_free()
+		backdrop.queue_free()
+		on_close.call())

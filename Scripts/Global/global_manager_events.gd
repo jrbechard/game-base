@@ -55,6 +55,13 @@ signal save_completed
 ## A load finished; success is false when no usable file was found.
 signal load_completed(success: bool)
 
+# === Game flow ===
+## Intent: move the game between its big states. target is `continue`, `new_game`, `editor`,
+## `title` or `quit`. Only Manager_Flow acts on it.
+signal flow_requested(target: StringName)
+## Intent: write the save file now (leaving to the title, quitting) instead of waiting for the autosave.
+signal save_requested
+
 # ==========================================================================
 # GAME EVENTS (per game; the two below are a worked example)
 # ==========================================================================

@@ -2,6 +2,11 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (boot flow): save on request, settings over any screen
+
+- **`Global_Manager_Save`**: `save_exists()` (true when a save or its backup is on disk) and it now writes at once on the new bus intent `save_requested`, so leaving to a title or quitting never waits on the autosave timer. New BASE bus events `flow_requested(target)` (the intent screens send to move the game between its big states; the game's flow manager acts on it) and `save_requested`. Tests: `Tests/test_save_requests.gd`.
+- **`Shell_Settings.open_over(parent, on_close)`**: opens the settings screen on top of any screen with a plain backdrop; the title, the pause menu and the puzzle pause menu all use it.
+- The title menu, the pause menu and `Manager_Flow` stay in the game (their entries are game specific); the base keeps the pieces above. Games started earlier: pull with `-Direction ToGame`.
 ## 2026-11-17 (CRT overlay): one CRT layer over every screen
 
 - **`Shell_Screen_Effect`** (new): a `Screen_Effect` layer in Main (above screens and overlays, below the transition) draws the CRT shader over whatever screen is showing. Strength is the new `screen_effect` setting (0 = off and the overlay is hidden, 1 = full), set from a slider in the settings screen through the usual bus intent; the look is Ever Blue's in-game one. It stays hidden until `splash_finished` when a splash plays, since the splash has its own CRT. Tests: `Tests/test_screen_effect.gd`. Main's scene and script were edited by hand (Main is not synced). Games started earlier: pull with `-Direction ToGame`, then add the layer to Main like the base's.

@@ -91,3 +91,4 @@ Scripts/Logic/logic_csv_rows.gd
 Tests/test_overworld_move.gd
 Scripts/Shell/shell_screen_effect.gd
 Tests/test_screen_effect.gd
+Tests/test_save_requests.gd
