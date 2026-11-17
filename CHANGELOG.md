@@ -2,6 +2,10 @@
 
 Newest first. One entry per upgrade of the base: what changed, which game it came from, and whether games started earlier need to pull it (`tools/sync_with_base.ps1 -Direction ToGame`).
 
+## 2026-11-17 (editor warnings): GDScript warnings cleared
+
+- Fixed the editor's GDScript warnings in `global_manager_input.gd` (the pad and keyboard sources are now cast to `Input_Source` in a ternary), `logic_stopwatch.gd` and `debug_tile_test.gd` (intended integer divisions are marked `@warning_ignore("integer_division")`). No behaviour change. Games started earlier: pull with `-Direction ToGame`.
+
 ## 2026-11-17 (prompts and cursors): button pictures that follow the device, the game's own mouse cursors
 
 - **`Logic_Input_Prompts`** (pure: which picture for which action on which device; `{action}` tokens in hint text), **`UI_Prompt_Icon`** (one picture, follows keyboard, mouse and pad type by itself), **`UI_Prompt_Line`** (a hint line built from a translation such as `{interact} Select   {cancel} Back`; rebuilt when the language changes). The pictures are Kenney's Input Prompts (CC0): Switch, Xbox and keyboard sets in `Assets/Prompts/`. `Input_Source_Keyboard.ACTION_KEYS` is now public so tests can check the key pictures against the real bindings.

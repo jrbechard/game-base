@@ -34,6 +34,7 @@ func _build_tile_set() -> TileSet:
 	src.texture = load("res://Assets/SVG/tiles_test.svg")
 	src.texture_region_size = Vector2i(TILE_PX, TILE_PX)
 	for i in 8:
+		@warning_ignore("integer_division")
 		src.create_tile(Vector2i(i % 4, i / 4))
 	ts.add_source(src)
 	return ts
@@ -46,6 +47,7 @@ func _fill_map() -> void:
 			var id := 0
 			if x >= SOLID_CELLS or y >= SOLID_CELLS:
 				id = rng.randi_range(0, 7)
+			@warning_ignore("integer_division")
 			_layer.set_cell(Vector2i(x, y), 0, Vector2i(id % 4, id / 4))
 
 # === Test ===

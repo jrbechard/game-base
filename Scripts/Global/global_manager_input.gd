@@ -210,7 +210,7 @@ func _set_mode(new_mode: DeviceMode) -> void:
 	if new_mode == device_mode:
 		return
 	device_mode = new_mode
-	source = _gamepad_source if new_mode == DeviceMode.GAMEPAD else _keyboard_source
+	source = (_gamepad_source as Input_Source) if new_mode == DeviceMode.GAMEPAD else _keyboard_source
 	Global_Manager_Events.device_mode_changed.emit(new_mode)
 
 func _set_last_pad(device: int) -> void:

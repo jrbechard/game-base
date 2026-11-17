@@ -28,4 +28,5 @@ func restore(seconds: float) -> void:
 ## Seconds as hours:minutes:seconds, like Picross S ("00:02:00").
 static func format(seconds: float) -> String:
 	var total := maxi(int(floorf(seconds)), 0)
+	@warning_ignore("integer_division")
 	return "%02d:%02d:%02d" % [total / 3600, (total / 60) % 60, total % 60]
